@@ -9,6 +9,6 @@ namespace Frederik.TariffComparison.Application.Features.TariffCalculation
 {
     public interface ICalculateTariffHandler
     {
-        Task<List<TariffCalculationDto>> Calculate(int consumptionKwh);
+        Task<List<TariffCalculationDto>> Calculate(GetConsumptionRequest getConsumptionDto);
     }
 }

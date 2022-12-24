@@ -1,4 +1,8 @@
-﻿using Frederik.TariffComparison.Application.Contracts.Infrastructure;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Frederik.TariffComparison.Application.Contracts.Infrastructure;
+using Frederik.TariffComparison.Application.DTOs;
+using Frederik.TariffComparison.Application.DTOs.Validators;
 using Frederik.TariffComparison.Application.Features.TariffCalculation;
 using Frederik.TariffComparison.Application.UnitTests.Mocks;
 using Moq;
@@ -25,8 +29,8 @@ namespace Frederik.TariffComparison.Application.UnitTests.TariffCalculation
         [InlineData(4500, 950, 1050)]
         public async Task ConsumptionTariff_Calculation_IsCorrect(int consumptionKwh, int annualCosts1, int annualCosts2)
         {
-            var handler = new CalculateTariffHandler(_tariffProvider.Object);
-            var results = await handler.Calculate(consumptionKwh);
+            var handler = new CalculateTariffHandler(_tariffProvider.Object, new GetConsumptionRequestValidator());
+            var results = await handler.Calculate(new GetConsumptionRequest { ConsumptionKwh = consumptionKwh });
 
             results.Count.ShouldBe(2);
 

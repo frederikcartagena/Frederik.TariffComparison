@@ -16,10 +16,10 @@ namespace Frederik.TariffComparison.API.Controllers
             _calculateTariffHandler = calculateTariffHandler;
         }
 
-        [HttpGet("{consumptionKwh}")]
-        public async Task<ActionResult<List<TariffCalculationDto>>> Get(int consumptionKwh)
+        [HttpGet("{ConsumptionKwh}")]
+        public async Task<ActionResult<List<TariffCalculationDto>>> Get([FromRoute] GetConsumptionRequest request)
         {
-            var calculations = await _calculateTariffHandler.Calculate(consumptionKwh);
+            var calculations = await _calculateTariffHandler.Calculate(request);
             return calculations;
         }
     }

@@ -1,4 +1,6 @@
-﻿using Frederik.TariffComparison.Application.Features.TariffCalculation;
+﻿using FluentValidation;
+using Frederik.TariffComparison.Application.DTOs.Validators;
+using Frederik.TariffComparison.Application.Features.TariffCalculation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace Frederik.TariffComparison.Application
         public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
             services.AddTransient<ICalculateTariffHandler, CalculateTariffHandler>();
+            services.AddValidatorsFromAssemblyContaining<GetConsumptionRequestValidator>();
 
             return services;
         }

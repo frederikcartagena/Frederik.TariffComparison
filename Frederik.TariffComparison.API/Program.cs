@@ -1,3 +1,4 @@
+using Frederik.TariffComparison.API.Middleware;
 using Frederik.TariffComparison.Application;
 using Frederik.TariffComparison.Infrastructure;
 
@@ -20,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
